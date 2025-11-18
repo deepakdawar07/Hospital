@@ -1,4 +1,4 @@
-import { FaBell, FaUserCircle } from "react-icons/fa";
+import { FaBell, FaUserCircle, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -36,6 +36,7 @@ export default function NavBar() {
     <nav className="bg-white shadow-md fixed top-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
+        {/* Logo */}
         <h1 className="text-2xl font-bold text-blue-600">CarePlus Hospital</h1>
 
         {/* Desktop Menu */}
@@ -56,27 +57,65 @@ export default function NavBar() {
           ))}
         </ul>
 
-        {/* Icons */}
-        <div className="hidden md:flex items-center gap-6 text-blue-600 text-xl">
+        {/* Desktop Right Section */}
+        <div className="hidden md:flex items-center gap-6">
+
+          {/* SEARCH BAR */}
+          <div
+            className="flex items-center bg-gray-100 px-3 py-1 rounded-full border border-gray-300 
+           focus-within:border-blue-500 transition-all duration-300
+           focus-within:shadow-[0_0_6px_2px_rgba(0,123,255,0.4)]">
+            <FaSearch className="text-gray-500 mr-2" />
+            <input
+              placeholder="Search..."
+              className="bg-transparent outline-none text-sm text-gray-700 w-36"
+            />
+          </div>
+
+          {/* Notification */}
           <div className="relative group">
-            <FaBell className="cursor-pointer hover:text-blue-800 duration-200" />
+            <FaBell className="text-blue-600 text-xl cursor-pointer hover:text-blue-800 duration-200" />
             <span className="absolute right-0 top-8 w-max bg-black text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition duration-300 shadow-lg">
               No new notifications
             </span>
           </div>
 
-          <FaUserCircle className="cursor-pointer hover:text-blue-800 duration-200" />
+          {/* Profile */}
+          <FaUserCircle className="text-blue-600 text-2xl cursor-pointer hover:text-blue-800 duration-200" />
         </div>
 
-        {/* Mobile button */}
-        <button className="md:hidden text-3xl text-blue-600" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
-        </button>
+        {/* MOBILE RIGHT ICONS */}
+        <div className="md:hidden flex items-center gap-4 text-blue-600">
+
+          {/* Bell */}
+          <FaBell className="text-2xl cursor-pointer hover:text-blue-800 duration-200" />
+
+          {/* User */}
+          <FaUserCircle className="text-3xl cursor-pointer hover:text-blue-800 duration-200" />
+
+          {/* Hamburger */}
+          <button className="text-3xl" onClick={() => setMenuOpen(!menuOpen)}>
+            ☰
+          </button>
+        </div>
+
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <ul className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 font-medium text-gray-700">
+
+          {/* MOBILE SEARCH BAR */}
+          <div
+            className="flex items-center bg-gray-100 px-3 py-2 rounded-full border border-gray-300 
+            focus-within:border-blue-500 transition-all duration-300
+            focus-within:shadow-[0_0_6px_2px_rgba(0,123,255,0.4)]">
+            <FaSearch className="text-gray-500 mr-2" />
+            <input
+              placeholder="Search..."
+              className="bg-transparent outline-none text-sm text-gray-700 w-full"
+            />
+          </div>
 
           {menuItems.map((item, index) => (
             <li key={index} className="group relative pb-1 cursor-pointer">
@@ -95,18 +134,6 @@ export default function NavBar() {
               ></span>
             </li>
           ))}
-
-          {/* Mobile Icons */}
-          <div className="flex items-center gap-6 text-blue-600 text-xl pt-3">
-            <div className="relative group">
-              <FaBell className="cursor-pointer hover:text-blue-800 duration-200" />
-              <span className="absolute left-10 top-1 w-max bg-black text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition duration-300 shadow-lg">
-                No new notifications
-              </span>
-            </div>
-
-            <FaUserCircle className="cursor-pointer hover:text-blue-800 duration-200" />
-          </div>
         </ul>
       )}
     </nav>
