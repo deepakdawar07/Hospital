@@ -2,25 +2,28 @@ import Navbar from "./NavBar";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
+// Layout.jsx (Modified to use less top padding)
+
+// ... imports
+
 export default function Layout() {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="bg-gray-100 min-h-screen">
 
-      {/* Sidebar */}
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
+      <Navbar />
 
-      <div className="flex flex-col flex-1">
+      {/* Content pushed down below fixed navbar (pt-16 is often enough for h-16 navbar) */}
+      <div className="pt-16 flex"> 
+        {/* ... rest of your layout code */}
+        {/* <div className="hidden md:block ">
+          <Sidebar />
+        </div> */}
 
-        {/* Navbar */}
-        <Navbar />
-
-        {/* Main Content */}
-        <main className="p-6 overflow-auto mt-20">
+        <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
       </div>
+
     </div>
   );
 }
