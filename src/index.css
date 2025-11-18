@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body {
+  @apply bg-deepBlue min-h-screen;
+} */
+
+body {
+  background: linear-gradient(135deg, #1b1b2f, #162447, #1f4068);
+  min-height: 100vh;
+}
+
+  
