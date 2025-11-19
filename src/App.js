@@ -9,7 +9,6 @@ export default function App() {
       <Route element={<Layout />}>
         {/* Home page route */}
         <Route path="/" element={<Home />} />
-
         {/* Dashboard route */}
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>
