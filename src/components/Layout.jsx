@@ -8,21 +8,26 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen flex flex-col">
 
+      {/* Navbar */}
       <Navbar />
 
-      {/* Content pushed down below fixed navbar (pt-16 is often enough for h-16 navbar) */}
-      <div className="pt-16 flex"> 
-        {/* ... rest of your layout code */}
-        {/* <div className="hidden md:block ">
-          <Sidebar />
-        </div> */}
+      {/* Main content area */}
+      <div className="flex flex-1 pt-16">
 
+
+        {/* Page content */}
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
+
       </div>
+
+      {/* Footer */}
+      <footer className="bg-white shadow-inner p-4 text-center mt-auto">
+        <p className="text-gray-600">&copy; 2025 YourShop. All rights reserved.</p>
+      </footer>
 
     </div>
   );
