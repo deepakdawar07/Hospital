@@ -1,5 +1,6 @@
+import Footer from "./Footer";
 import Navbar from "./NavBar";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
 // Layout.jsx (Modified to use less top padding)
@@ -23,12 +24,7 @@ export default function Layout() {
         </main>
 
       </div>
-
-      {/* Footer */}
-      <footer className="bg-white shadow-inner p-4 text-center mt-auto">
-        <p className="text-gray-600">&copy; 2025 YourShop. All rights reserved.</p>
-      </footer>
-
+        <Footer/>
     </div>
   );
 }

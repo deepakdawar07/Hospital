@@ -33,11 +33,11 @@ export default function NavBar() {
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed top-0 w-full z-50">
+    <nav className="bg-white shadow-xl fixed top-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-blue-600">CarePlus Hospital</h1>
+        <h1 className="text-2xl font-bold text-blue-600">Sunrise Multi-Speciality Hospital</h1>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 font-medium text-gray-600">
