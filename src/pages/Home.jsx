@@ -3,7 +3,7 @@ import React from "react";
 import ScrollableImages from "../components/ScrollableImages";
 import DepartmentsList from "./Department/DepartmentList";
 import About from "./About";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 export default function Home() {
   const images = [
