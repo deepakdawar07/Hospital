@@ -85,7 +85,7 @@ export default function PatientList() {
           <td className="p-3 border border-gray-300">{p.mobileNo}</td>
           <td className="p-3 border border-gray-300 max-w-xs break-words">
             {p.address
-              ? `${p.address.street}, ${p.address.city}, ${p.address.state} - ${p.address.pinCode}`
+              ? `${p.address.street}, ${p.address.city}, ${p.address.state} - ${p.address.pincode}`
               : ""}
           </td>
           <td className="p-4 border border-gray-300 flex gap-3">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import api from "../../api/axiosConfig";
 export default function AddDoctor() {
   const [doctor, setDoctor] = useState({
     name: "",
@@ -8,10 +8,17 @@ export default function AddDoctor() {
     phone: "",
   });
 
+  const update = (e)=>{
+      setDoctor({...doctor,[e.target.name]:e.target.value});
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Doctor Added:", doctor);
-    alert("Doctor Added Successfully!");
+    try{
+        await api.post("api/doctores",form);
+    }
+    catch{
+
+    }
   };
 
   return (
@@ -26,60 +33,33 @@ export default function AddDoctor() {
 
           <div>
             <label className="font-semibold">Full Name</label>
-            <input
-              type="text"
-              value={doctor.name}
-              onChange={(e) =>
-                setDoctor({ ...doctor, name: e.target.value })
-              }
-              placeholder="Dr. John Doe"
+            <input type="text" value={doctor.name} onChange={(e) =>update}placeholder="Dr. John Doe"
               className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
 
           <div>
             <label className="font-semibold">Specialization</label>
-            <input
-              type="text"
-              value={doctor.specialization}
-              onChange={(e) =>
-                setDoctor({ ...doctor, specialization: e.target.value })
-              }
-              placeholder="Cardiologist"
+            <input type="text" value={doctor.specialization} onChange={(e) =>update}placeholder="Cardiologist"
               className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
 
           <div>
             <label className="font-semibold">Experience (Years)</label>
-            <input
-              type="number"
-              value={doctor.experience}
-              onChange={(e) =>
-                setDoctor({ ...doctor, experience: e.target.value })
-              }
-              placeholder="5"
+            <input type="number" value={doctor.experience} onChange={(e) =>update}placeholder="5"
               className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
 
           <div>
             <label className="font-semibold">Contact Number</label>
-            <input
-              type="text"
-              value={doctor.phone}
-              onChange={(e) =>
-                setDoctor({ ...doctor, phone: e.target.value })
-              }
-              placeholder="+91 9876543210"
+            <input type="text" value={doctor.phone} onChange={(e) =>update}placeholder="+91 9876543210"
               className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-lg"
-          >
+          <button type="submit"className="w-full h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-lg">
             Add Doctor
           </button>
         </form>

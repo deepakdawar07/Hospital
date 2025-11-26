@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function AddPatient() {
   const navigate = useNavigate();
-
+  
   const [form, setForm] = useState({
     fullName: "",
     age: "",
@@ -14,7 +14,7 @@ export default function AddPatient() {
     street: "",
     city: "",
     state: "",
-    pinCode: "",
+    pincode: "",
   });
 
   const update = (e) =>
@@ -94,7 +94,7 @@ export default function AddPatient() {
         />
 
         <input
-          name="pinCode"
+          name="pincode"
           placeholder="Pin Code"
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
