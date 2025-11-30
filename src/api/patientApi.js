@@ -1,10 +1,5 @@
-const submitForm = async (e) => {
-  e.preventDefault();
-  try {
-    await api.post("/api/patients", form);
-    toast.success("Patient added successfully");
-    navigate("/patients");
-  } catch {
-    toast.error("Failed to add patient");
-  }
-};
+import api from './axiosConfig';
+
+export const addPatient =(data)=>{
+  return api.post("/api/patients",data);
+}

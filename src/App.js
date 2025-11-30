@@ -17,14 +17,14 @@ import AddAppointment from "./pages/Appointments/AddAppointment";
 import CalendarView from "./pages/Appointments/CalendarView";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Toaster } from "react-hot-toast";
 import AuthAdmin from "./pages/Admin/AuthAdmin";
 import AuthFaculty from "./pages/Faculty/AuthFaculty";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
     <>
-      <Toaster position="top-center" />
+      <ToastContainer position="top-center" />
 
       <Routes>
 

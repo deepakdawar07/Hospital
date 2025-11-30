@@ -1,11 +1,11 @@
 import { useState } from "react";
-import api from "../../api/axiosConfig";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { addPatient } from "../../api/patientApi";
+import { toast } from "react-toastify";
 
 export default function AddPatient() {
   const navigate = useNavigate();
-  
+
   const [form, setForm] = useState({
     fullName: "",
     age: "",
@@ -17,18 +17,23 @@ export default function AddPatient() {
     pincode: "",
   });
 
-  const update = (e) =>
+  const update = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const [loading, setLoading] = useState(false);
 
   const submitForm = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
-      await api.post("/api/patients", form);
-      toast.success("Patient added successfully");
+      const response = await addPatient(form);
+      toast.success(response.data.message);
       navigate("/patients");
-    } catch {
-      toast.error("Failed to add patient");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to add patient");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,73 +44,83 @@ export default function AddPatient() {
       </h2>
 
       <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={submitForm}>
-
+        
         <input
           name="fullName"
+          value={form.fullName}
           placeholder="Full Name"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <input
           name="age"
-          placeholder="Age"
           type="number"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={form.age}
+          placeholder="Age"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <select
           name="gender"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={form.gender}
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         >
           <option value="">Select Gender</option>
-          <option>Male</option>
-          <option>Female</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
 
         <input
           name="mobileNo"
+          value={form.mobileNo}
           placeholder="Mobile Number"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <input
           name="street"
+          value={form.street}
           placeholder="Street"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <input
           name="city"
+          value={form.city}
           placeholder="City"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <input
           name="state"
+          value={form.state}
           placeholder="State"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <input
           name="pincode"
+          value={form.pincode}
           placeholder="Pin Code"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onChange={update}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
         />
 
         <button
           type="submit"
-          className="col-span-1 md:col-span-2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-200"
+          disabled={loading}
+          className="col-span-1 md:col-span-2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all"
         >
-          Submit
+          {loading ? "Submitting..." : "Submit"}
         </button>
+
       </form>
     </div>
   );

@@ -34,7 +34,6 @@ export default function AuthAdmin() {
 
       const response = await axios.post(endpoint, payload);
 
-      // expected response → { token, id, name, email }
       const user = {
         token: response.data.token,
         id: response.data.id,
