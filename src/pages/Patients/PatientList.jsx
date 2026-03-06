@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { showPatient } from "../../api/patientApi";
 
 export default function PatientList() {
   const [patients, setPatients] = useState([]);
@@ -13,13 +14,14 @@ export default function PatientList() {
   }, []);
 
   const loadPatients = async () => {
-    try {
-      const res = await api.get("/api/patients");
-      setPatients(res.data);
-    } catch (err) {
-      toast.error("Failed to load patients");
-    }
-  };
+  try {
+    const res = await showPatient();
+    setPatients(res.data.data);
+  } catch (err) {
+    toast.error("Failed to load patients");
+  }
+};
+
 
   const deletePatient = async (id) => {
     if (!window.confirm("Are you sure?")) return;
@@ -33,9 +35,11 @@ export default function PatientList() {
     }
   };
 
-  const filtered = patients.filter((p) =>
-    p.fullName.toLowerCase().includes(search.toLowerCase())
-  );
+ const filtered = Array.isArray(patients)
+  ? patients.filter((p) =>
+      p.fullName.toLowerCase().includes(search.toLowerCase())
+    )
+  : [];
 
   return (
     <div className="p-6">
@@ -94,7 +98,7 @@ export default function PatientList() {
               className="text-green-600 hover:text-green-800"
             >
               <FaEdit size={18} />
-            </Link> 
+            </Link>
             <button
               onClick={() => deletePatient(p.id)}
               className="text-red-600 hover:text-red-800"
@@ -106,15 +110,13 @@ export default function PatientList() {
       ))
     ) : (
       <tr>
-        <td
-          className="p-3 text-center text-gray-500 border border-gray-300"
-          colSpan="6"
-        >
+        <td className="p-3 text-center text-gray-500 border border-gray-300" colSpan="6">
           No patients found
         </td>
       </tr>
     )}
   </tbody>
+
 </table>
 
       </div>

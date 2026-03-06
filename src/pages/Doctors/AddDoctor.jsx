@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addDoctor } from "../../api/doctorApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function AddDoctor() {
   const [doctor, setDoctor] = useState({
@@ -9,6 +10,8 @@ export default function AddDoctor() {
     experience: "",
     phone: "",
   });
+
+  const navigate = useNavigate();
 
   const update = (e) => {
     setDoctor({ ...doctor, [e.target.name]: e.target.value });
@@ -19,6 +22,7 @@ export default function AddDoctor() {
     try {
       const response = await addDoctor(doctor);
       toast.success(response.data.message);
+      navigate("/doctors");
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to add Doctor");
     }
@@ -26,7 +30,7 @@ export default function AddDoctor() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6 flex justify-center">
-      <div className="w-full max-w-xl mt-10 bg-white/70 backdrop-blur-xl shadow-2xl border border-white/40 rounded-2xl p-8">
+      <div className="w-full max-w-xl  mt-10 bg-white/70 backdrop-blur-xl shadow-2xl border border-white/40 rounded-2xl p-8">
 
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
           Add New Doctor
@@ -64,8 +68,7 @@ export default function AddDoctor() {
           </div>
 
           <button type="submit"
-            className="w-full h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-lg"
-          >
+            className="w-full h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-lg">
             Add Doctor
           </button>
         </form>

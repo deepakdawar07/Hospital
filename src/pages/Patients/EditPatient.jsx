@@ -19,25 +19,30 @@ export default function EditPatient() {
   });
 
   // Load patient data
-  const loadPatient = useCallback(async () => {
-    try {
-      const res = await api.get(`/api/patients/${id}`);
-      // Backend returns embedded address object
-      const data = res.data;
-      setForm({
-        fullName: data.fullName || "",
-        age: data.age || "",
-        gender: data.gender || "",
-        mobileNo: data.mobileNo || "",
-        street: data.address?.street || "",
-        city: data.address?.city || "",
-        state: data.address?.state || "",
-        pincode: data.address?.pincode || "",
-      });
-    } catch (err) {
-      toast.error("Failed to load patient");
-    }
-  }, [id]);
+  const [loading, setLoading] = useState(false);
+
+const loadPatient = useCallback(async () => {
+  setLoading(true);
+  try {
+    const res = await api.get(`/api/patients/${id}`);
+    const data = res.data.data;
+    setForm({
+      fullName: data.fullName || "",
+      age: data.age || "",
+      gender: data.gender || "",
+      mobileNo: data.mobileNo || "",
+      street: data.address?.street || "",
+      city: data.address?.city || "",
+      state: data.address?.state || "",
+      pincode: data.address?.pincode || "",
+    });
+  } catch (err) {
+    toast.error("Failed to load patient");
+  } finally {
+    setLoading(false);
+  }
+}, [id]);
+
 
   useEffect(() => {
     loadPatient();

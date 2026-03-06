@@ -31,7 +31,7 @@ export default function AddPatient() {
       toast.success(response.data.message);
       navigate("/patients");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to add patient");
+      toast.error(err.response?.data?.message);
     } finally {
       setLoading(false);
     }
